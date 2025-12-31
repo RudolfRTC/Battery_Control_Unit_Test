@@ -32,50 +32,50 @@ extern I2C_HandleTypeDef hi2c2;
 extern SPI_HandleTypeDef hspi4;
 extern UART_HandleTypeDef huart1;
 
-/* Module output pin mappings based on corrected IOC file */
+/* Module output pin mappings - Using defines from main.h */
 static const GPIO_Pin_t module_outputs[NUM_MODULES][OUTPUTS_PER_MODULE] = {
-    // Module 0: OUT0_0 (PE13), OUT1_0 (PE14), OUT2_0 (PE15), OUT3_0 (PB10)
-    {{GPIOE, GPIO_PIN_13}, {GPIOE, GPIO_PIN_14}, {GPIOE, GPIO_PIN_15}, {GPIOB, GPIO_PIN_10}},
-    // Module 1: OUT0_1 (PD10), OUT1_1 (PD11), OUT2_1 (PD12), OUT3_1 (PD13)
-    {{GPIOD, GPIO_PIN_10}, {GPIOD, GPIO_PIN_11}, {GPIOD, GPIO_PIN_12}, {GPIOD, GPIO_PIN_13}},
-    // Module 2: OUT0_2 (PG6), OUT1_2 (PG3), OUT2_2 (PG4), OUT3_2 (PG5)
-    {{GPIOG, GPIO_PIN_6}, {GPIOG, GPIO_PIN_3}, {GPIOG, GPIO_PIN_4}, {GPIOG, GPIO_PIN_5}},
-    // Module 3: OUT0_3 (PA8), OUT1_3 (PA9), OUT2_3 (PA10), OUT3_3 (PA11)
-    {{GPIOA, GPIO_PIN_8}, {GPIOA, GPIO_PIN_9}, {GPIOA, GPIO_PIN_10}, {GPIOA, GPIO_PIN_11}},
-    // Module 4: OUT0_4 (PC12), OUT1_4 (PD0), OUT2_4 (PD1), OUT3_4 (PD2)
-    {{GPIOC, GPIO_PIN_12}, {GPIOD, GPIO_PIN_0}, {GPIOD, GPIO_PIN_1}, {GPIOD, GPIO_PIN_2}},
-    // Module 5: OUT0_5 (PD6), OUT1_5 (PD7), OUT3_5 (PG10) - NOTE: OUT2_5 doesn't exist, PG9 is LEM_OC10 interrupt!
-    {{GPIOD, GPIO_PIN_6}, {GPIOD, GPIO_PIN_7}, {GPIOG, GPIO_PIN_10}, {GPIOG, GPIO_PIN_10}}  // OUT2 = OUT3 (only 3 outputs)
+    // Module 0: OUT0_0, OUT1_0, OUT2_0, OUT3_0
+    {{OUT0_0_GPIO_Port, OUT0_0_Pin}, {OUT1_0_GPIO_Port, OUT1_0_Pin},
+     {OUT2_0_GPIO_Port, OUT2_0_Pin}, {OUT3_0_GPIO_Port, OUT3_0_Pin}},
+    // Module 1: OUT0_1, OUT1_1, OUT2_1, OUT3_1
+    {{OUT0_1_GPIO_Port, OUT0_1_Pin}, {OUT1_1_GPIO_Port, OUT1_1_Pin},
+     {OUT2_1_GPIO_Port, OUT2_1_Pin}, {OUT3_1_GPIO_Port, OUT3_1_Pin}},
+    // Module 2: OUT0_2, OUT1_2, OUT2_2, OUT3_2
+    {{OUT0_2_GPIO_Port, OUT0_2_Pin}, {OUT1_2_GPIO_Port, OUT1_2_Pin},
+     {OUT2_2_GPIO_Port, OUT2_2_Pin}, {OUT3_2_GPIO_Port, OUT3_2_Pin}},
+    // Module 3: OUT0_3, OUT1_3, OUT2_3, OUT3_3
+    {{OUT0_3_GPIO_Port, OUT0_3_Pin}, {OUT1_3_GPIO_Port, OUT1_3_Pin},
+     {OUT2_3_GPIO_Port, OUT2_3_Pin}, {OUT3_3_GPIO_Port, OUT3_3_Pin}},
+    // Module 4: OUT0_4, OUT1_4, OUT2_4, OUT3_4
+    {{OUT0_4_GPIO_Port, OUT0_4_Pin}, {OUT1_4_GPIO_Port, OUT1_4_Pin},
+     {OUT2_4_GPIO_Port, OUT2_4_Pin}, {OUT3_4_GPIO_Port, OUT3_4_Pin}}
 };
 
-/* Module enable pins (DEN_x) */
+/* Module enable pins (DEN_x) - Using defines from main.h */
 static const GPIO_Pin_t module_enable[NUM_MODULES] = {
-    {GPIOE, GPIO_PIN_10},  // DEN_0
-    {GPIOB, GPIO_PIN_15},  // DEN_1
-    {GPIOD, GPIO_PIN_14},  // DEN_2
-    {GPIOC, GPIO_PIN_7},   // DEN_3
-    {GPIOA, GPIO_PIN_15},  // DEN_4
-    {GPIOD, GPIO_PIN_3}    // DEN_5
+    {DEN_0_GPIO_Port, DEN_0_Pin},  // DEN_0
+    {DEN_1_GPIO_Port, DEN_1_Pin},  // DEN_1
+    {DEN_2_GPIO_Port, DEN_2_Pin},  // DEN_2
+    {DEN_3_GPIO_Port, DEN_3_Pin},  // DEN_3
+    {DEN_4_GPIO_Port, DEN_4_Pin}   // DEN_4
 };
 
-/* Module device select pins DSEL0 */
+/* Module device select pins DSEL0 - Using defines from main.h */
 static const GPIO_Pin_t module_dsel0[NUM_MODULES] = {
-    {GPIOE, GPIO_PIN_11},  // DSEL0_0
-    {GPIOD, GPIO_PIN_8},   // DSEL0_1
-    {GPIOG, GPIO_PIN_2},   // DSEL0_2
-    {GPIOC, GPIO_PIN_8},   // DSEL0_3
-    {GPIOC, GPIO_PIN_10},  // DSEL0_4
-    {GPIOD, GPIO_PIN_4}    // DSEL0_5
+    {DSEL0_0_GPIO_Port, DSEL0_0_Pin},  // DSEL0_0
+    {DSEL0_1_GPIO_Port, DSEL0_1_Pin},  // DSEL0_1
+    {DSEL0_2_GPIO_Port, DSEL0_2_Pin},  // DSEL0_2
+    {DSEL0_3_GPIO_Port, DSEL0_3_Pin},  // DSEL0_3
+    {DSEL0_4_GPIO_Port, DSEL0_4_Pin}   // DSEL0_4
 };
 
-/* Module device select pins DSEL1 */
+/* Module device select pins DSEL1 - Using defines from main.h */
 static const GPIO_Pin_t module_dsel1[NUM_MODULES] = {
-    {GPIOE, GPIO_PIN_12},  // DSEL1_0
-    {GPIOD, GPIO_PIN_9},   // DSEL1_1
-    {GPIOD, GPIO_PIN_15},  // DSEL1_2
-    {GPIOC, GPIO_PIN_9},   // DSEL1_3
-    {GPIOC, GPIO_PIN_11},  // DSEL1_4
-    {GPIOD, GPIO_PIN_5}    // DSEL1_5
+    {DSEL1_0_GPIO_Port, DSEL1_0_Pin},  // DSEL1_0
+    {DSEL1_1_GPIO_Port, DSEL1_1_Pin},  // DSEL1_1
+    {DSEL1_2_GPIO_Port, DSEL1_2_Pin},  // DSEL1_2
+    {DSEL1_3_GPIO_Port, DSEL1_3_Pin},  // DSEL1_3
+    {DSEL1_4_GPIO_Port, DSEL1_4_Pin}   // DSEL1_4
 };
 
 /* Digital input pins */
@@ -131,7 +131,7 @@ void BMU_Test_Init(void)
     }
 
     // Turn off LED
-    HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
 
     BMU_Printf("Initialization complete!\r\n");
     BMU_Test_PrintMenu();
@@ -405,7 +405,7 @@ TestResult_t BMU_Test_BTT6200_Diagnostics(void)
 {
     BMU_Printf("\r\n╔════════════════════════════════════════════════╗\r\n");
     BMU_Printf("║   BTT6200-4ESA DIAGNOSTIC TEST                 ║\r\n");
-    BMU_Printf("║   Testing all 6 modules with 4 outputs each    ║\r\n");
+    BMU_Printf("║   Testing all 5 modules with 4 outputs each    ║\r\n");
     BMU_Printf("╚════════════════════════════════════════════════╝\r\n\r\n");
 
     // Enable power supplies
@@ -494,9 +494,9 @@ TestResult_t BMU_Test_BTT6200_Diagnostics(void)
 TestResult_t BMU_Test_LED(void)
 {
     for(uint8_t i = 0; i < 3; i++) {
-        HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
         HAL_Delay(100);
-        HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
         HAL_Delay(100);
     }
     return TEST_PASS;
@@ -576,7 +576,7 @@ TestResult_t BMU_Test_SPI4(void)
     uint8_t tx_data[4] = {0xAA, 0x55, 0xF0, 0x0F};
     uint8_t rx_data[4] = {0};
 
-    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, GPIO_PIN_SET);  // ISOSPI_EN
+    HAL_GPIO_WritePin(ISOSPI_EN_GPIO_Port, ISOSPI_EN_Pin, GPIO_PIN_SET);
     HAL_Delay(10);
 
     return (HAL_SPI_TransmitReceive(&hspi4, tx_data, rx_data, 4, 1000) == HAL_OK) ? TEST_PASS : TEST_FAIL;
@@ -689,16 +689,16 @@ bool BMU_Module_GetInput(uint8_t input_num)
 void BMU_Power_Enable24V(bool enable)
 {
     GPIO_PinState state = enable ? GPIO_PIN_SET : GPIO_PIN_RESET;
-    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_13, state);  // PWR_24V_EN
+    HAL_GPIO_WritePin(PWR_24V_EN_GPIO_Port, PWR_24V_EN_Pin, state);
 }
 
 /**
-  * @brief  Power control - 3V Enable
+  * @brief  Power control - 5V Enable (EN_5V)
   */
 void BMU_Power_Enable3V(bool enable)
 {
     GPIO_PinState state = enable ? GPIO_PIN_SET : GPIO_PIN_RESET;
-    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_7, state);  // 3V_EN (corrected)
+    HAL_GPIO_WritePin(EN_5V_GPIO_Port, EN_5V_Pin, state);
 }
 
 /**
@@ -707,7 +707,7 @@ void BMU_Power_Enable3V(bool enable)
 void BMU_Power_Enable3V3A(bool enable)
 {
     GPIO_PinState state = enable ? GPIO_PIN_SET : GPIO_PIN_RESET;
-    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_8, state);  // EN_3V3A
+    HAL_GPIO_WritePin(EN_3V3A_GPIO_Port, EN_3V3A_Pin, state);
 }
 
 /**
@@ -716,7 +716,7 @@ void BMU_Power_Enable3V3A(bool enable)
 void BMU_Power_Sleep(bool sleep)
 {
     GPIO_PinState state = sleep ? GPIO_PIN_SET : GPIO_PIN_RESET;
-    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, state);  // PWR_SLEEP
+    HAL_GPIO_WritePin(PWR_SLEEP_GPIO_Port, PWR_SLEEP_Pin, state);
 }
 
 /**
@@ -724,7 +724,7 @@ void BMU_Power_Sleep(bool sleep)
   */
 bool BMU_Power_Get5VGood(void)
 {
-    return HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_11) == GPIO_PIN_SET;  // PG_5V
+    return HAL_GPIO_ReadPin(PG_5V_GPIO_Port, PG_5V_Pin) == GPIO_PIN_SET;
 }
 
 /**
@@ -732,7 +732,7 @@ bool BMU_Power_Get5VGood(void)
   */
 bool BMU_Power_Get3V3AGood(void)
 {
-    return HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_12) == GPIO_PIN_SET;  // PG_3V3A
+    return HAL_GPIO_ReadPin(PG_3V3A_GPIO_Port, PG_3V3A_Pin) == GPIO_PIN_SET;
 }
 
 /**

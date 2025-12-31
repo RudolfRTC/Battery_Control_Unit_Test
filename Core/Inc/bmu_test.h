@@ -45,7 +45,7 @@ typedef struct {
 } GPIO_Pin_t;
 
 /* Exported constants --------------------------------------------------------*/
-#define NUM_MODULES         6
+#define NUM_MODULES         5    // Only 5 modules defined in IOC (0-4)
 #define OUTPUTS_PER_MODULE  4
 #define NUM_DIGITAL_INPUTS  21   // IN_0 to IN_20
 #define NUM_ADC_CHANNELS    16   // ADC IN0 to IN15
