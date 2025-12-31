@@ -64,6 +64,7 @@ typedef struct {
 #define CMD_SELF_TEST       '9'
 #define CMD_LED_BLINK       'l'
 #define CMD_STATS           's'
+#define CMD_BTT_DIAG        'd'
 
 /* Exported macro ------------------------------------------------------------*/
 #define PRINTF_BUFFER_SIZE  256
@@ -81,6 +82,7 @@ TestResult_t BMU_Test_GPIO_Outputs(void);
 TestResult_t BMU_Test_GPIO_Inputs(void);
 TestResult_t BMU_Test_Module_Outputs(uint8_t module_num);
 TestResult_t BMU_Test_LED(void);
+TestResult_t BMU_Test_BTT6200_Diagnostics(void);
 
 /* ADC Tests */
 TestResult_t BMU_Test_ADC_AllChannels(void);
